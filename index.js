@@ -41,30 +41,31 @@ const Intern = require('./intern');
 
 let team = []
 
+let role = "manager"
 
 function start () {
-    console.log ("Enter Member team")
+    console.log ("Enter Manager information")
 
     inquirer.prompt ([
         {
             type: 'input',
             name: 'name',
-            message: "What is the team manager's name?"
+            message: "Enter name?"
         },
         {
             type: 'input',
             name: 'id',
-            message: "What is the manager's employee ID?"
+            message: "Enter employee ID?"
         },
         {
             type: 'input',
             name: 'email',
-            message: "What is the manager's email?"
+            message: "Enter email?"
         },
         {
             type: 'input',
             name: 'officeNumber',
-            message: "What is the manager's office number?"
+            message: "Enter office number?"
         }
     ])
         .then (answer => {
@@ -73,10 +74,13 @@ function start () {
             // createCard(manager)
             team.push (createCard(manager));
 
+            moreQuestions ()
+
             // console.log("team member added");
             // console.log(team[0]);
         })
-
+      
+        // .catch(err => { console.log(err)});
 
 }
 
@@ -84,9 +88,7 @@ function createCard (member) {
 
     console.log("inside function")
 
-   
-
-switch (member) {
+switch (role) {
     case 'manager':
       return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: steelblue;">
@@ -131,3 +133,119 @@ switch (member) {
 }
 
 start ()
+
+function moreQuestions () {
+
+   inquirer
+    .prompt([
+        {
+            type: 'list',
+            name: 'member',
+            message: "Choose the next type of employee to add.",
+            choices: ["Engineer", "Intern", "All done"]
+        }
+    ])
+    .then (answer => {
+      
+      
+        switch (answer.member) {
+            case "Engineer":
+               return engineerQuestions ()
+              
+              break;
+            case "Intern":
+                internQuestions ()
+              
+              break;
+            case "All done":
+               
+              break;
+           
+          }
+
+    })
+  
+    .catch(err => { console.log(err)});
+
+}
+
+
+
+
+function engineerQuestions () {
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "Enter name?"
+        },
+        {
+            type: "input",
+            name: 'id',
+            message: "Enter employee ID?"
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Enter email address?"
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "Enter GitHub username?"
+        }
+    ])
+
+    .then (answer => {
+      
+        const engineer = new Engineer (answer.name, answer.id, answer.email, answer.github);
+
+        role = engineer
+
+        team.push (createCard(engineer));
+
+        moreQuestions ()
+    })
+        .catch(err => { console.log(err)});
+
+}
+
+
+function internQuestions () {
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "Enter name?"
+        },
+        {
+            type: "input",
+            name: 'id',
+            message: "Enter employee ID?"
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "Enter email address?"
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "Enter school?"
+        }
+    ])
+
+    .then (answer => {
+      
+        const intern = new Intern (answer.name, answer.id, answer.email, answer.school);
+        team.push (createCard(intern));
+
+        role = intern
+
+        moreQuestions ()
+    })
+        .catch(err => { console.log(err)});
+        
+}
