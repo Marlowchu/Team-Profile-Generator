@@ -201,7 +201,7 @@ function engineerQuestions () {
       
         const engineer = new Engineer (answer.name, answer.id, answer.email, answer.github);
 
-        role = engineer
+        role = "engineer"
 
         team.push (createCard(engineer));
 
@@ -232,7 +232,7 @@ function internQuestions () {
         },
         {
             type: 'input',
-            name: 'github',
+            name: 'school',
             message: "Enter school?"
         }
     ])
@@ -240,9 +240,10 @@ function internQuestions () {
     .then (answer => {
       
         const intern = new Intern (answer.name, answer.id, answer.email, answer.school);
-        team.push (createCard(intern));
 
-        role = intern
+        role = "intern"
+
+        team.push (createCard(intern));
 
         moreQuestions ()
     })
