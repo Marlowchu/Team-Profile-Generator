@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
-// const fs = require('fs');
-// const generateHtml = require('./generateHtml');
+const fs = require('fs');
+const generateHtml = require('./generateHtml');
 
 
 
@@ -10,14 +10,14 @@ const inquirer = require('inquirer');
 
 
 
-// function writeToFile(fileName, data) {
-//     fs.writeFile(fileName, data, function (err) {
-//         if (err) {
-//             return console.log(err);
-//         } else
-//             console.log("Generating README...");
-//     });
-// };
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function (err) {
+        if (err) {
+            return console.log(err);
+        } else
+            console.log("Generating HTML...");
+    });
+};
 
 
 // function init() {
@@ -41,7 +41,7 @@ const Intern = require('./intern');
 
 let team = []
 
-let role = "manager"
+let role = "Manager"
 
 function start () {
     console.log ("Enter Manager information")
@@ -80,7 +80,7 @@ function start () {
             // console.log(team[0]);
         })
       
-        // .catch(err => { console.log(err)});
+        .catch(err => { console.log(err)});
 
 }
 
@@ -89,11 +89,11 @@ function createCard (member) {
     console.log("inside function")
 
 switch (role) {
-    case 'manager':
+    case 'Manager':
       return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: steelblue;">
           <h2>${member.name}</h2>
-          <h3>member</h3>
+          <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -102,11 +102,11 @@ switch (role) {
       </div>
   </div>`
       break;
-    case 'engineer':
+    case 'Engineer':
       return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: steelblue;">
           <h2>${member.name}</h2>
-          <h3>member</h3>
+          <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -115,11 +115,11 @@ switch (role) {
       </div>
   </div>`      
   break;
-    case 'intern':
+    case 'Intern':
       return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: steelblue;">
           <h2>${member.name}</h2>
-          <h3>member</h3>
+          <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -158,7 +158,8 @@ function moreQuestions () {
               
               break;
             case "All done":
-               
+                const htmlInfo = generateHtml(team);
+                writeToFile('./utils/Team.html', htmlInfo);
               break;
            
           }
@@ -201,7 +202,7 @@ function engineerQuestions () {
       
         const engineer = new Engineer (answer.name, answer.id, answer.email, answer.github);
 
-        role = "engineer"
+        role = "Engineer"
 
         team.push (createCard(engineer));
 
@@ -241,7 +242,7 @@ function internQuestions () {
       
         const intern = new Intern (answer.name, answer.id, answer.email, answer.school);
 
-        role = "intern"
+        role = "Intern"
 
         team.push (createCard(intern));
 
