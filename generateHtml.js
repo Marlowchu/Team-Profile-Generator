@@ -1,7 +1,4 @@
-// var div = $('.print');
 
-
-// var div = document.querySelector(".print")
 
 let team1 = []
 
@@ -23,12 +20,12 @@ return `<!DOCTYPE html>
 </head>
 <body>
 
-    <h1 style="background-color: red; text-align: center; color: seashell; height: 150px;">MY TEAM</h1>
+    <h1 style="background-color: red; text-align: center; color: seashell; height: 110px;">MY TEAM</h1>
 
 
 <div class= "container">
 
-  <div class= "row" id= "print">${team1.join(' ')}</div>
+  <div class= "row justify-content-center" id= "print">${team1.join(' ')}</div>
   
 </div>   
 </body>

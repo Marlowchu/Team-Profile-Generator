@@ -90,41 +90,41 @@ function createCard (member) {
 
 switch (role) {
     case 'Manager':
-      return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
-      <div style="background-color: steelblue;">
+      return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
+      <div style="background-color: steelblue; border-style: solid;">
           <h2>${member.name}</h2>
           <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
-          <div>Email: ${member.email}</div>
+          <a href="mailto:${member.email}">Email: ${member.email}</a>
           <div>Office #: ${member.officeNumber}</div>
       </div>
   </div>`
       break;
     case 'Engineer':
-      return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
-      <div style="background-color: steelblue;">
+      return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
+      <div style="background-color: lightgreen; border-style: solid;">
           <h2>${member.name}</h2>
           <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
-          <div>Email: ${member.email}</div>
-          <div>Office #: ${member.github}</div>
+          <a href="mailto:${member.email}">Email: ${member.email}</a>
+          <a href="https://github.com/${member.github}" target="_blank">Github: ${member.github}</a>
       </div>
   </div>`      
   break;
     case 'Intern':
-      return `<div class = "col-3" style="width: 250px; height: 250px; background-color: springgreen; margin-left: 20px; margin-bottom: 20px;">
-      <div style="background-color: steelblue;">
+      return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
+      <div style="background-color: yellow; border-style: solid;">
           <h2>${member.name}</h2>
           <h3>${role}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
-          <div>Email: ${member.email}</div>
-          <div>Office #: ${member.school}</div>
+          <a href="mailto:${member.email}">Email: ${member.email}</a>
+          <div>School #: ${member.school}</div>
       </div>
   </div>`
       break;
