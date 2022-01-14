@@ -1,10 +1,11 @@
 const Employee = require(`../lib/employee`)
 
-test ("Testing set name", () => {
+describe ("Testing set name", () => {
+   it ("Should return the vaue it recieved", () => {
     const test = "chuck";
     const employee = new Employee(test);
     expect(employee.name).toBe(test);
-
+})
 })
 
 test ("Testing set id", () => {
