@@ -1,5 +1,4 @@
 
-
 let team1 = []
 
 function generateHtml (data) {
@@ -30,9 +29,7 @@ return `<!DOCTYPE html>
 </div>   
 </body>
 </html>`
-
-// team1.forEach(makeDiv())
-    
+  
 }
 
 

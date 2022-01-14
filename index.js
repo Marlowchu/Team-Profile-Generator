@@ -2,46 +2,15 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHtml = require('./src/generateHtml');
 
-
-
-
-// const questions = []
-
-
-
-
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, function (err) {
-        if (err) {
-            return console.log(err);
-        } else
-            console.log("Generating HTML...");
-    });
-};
-
-
-// function init() {
-//     inquirer.prompt(questions)
-//     .then(answers => {
-//         const htmlInfo = generateHtml(answers);
-//         writeToFile('./utils/Team.html', htmlInfo);
-//     })
-//     .catch(err => { console.log(err)});
-// }
-
-
-// init ();
-
-
-// const Employee = require('./lib/employee');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 
-
 let team = []
 
-let role = "Manager"
+start ()
+
+
 
 function start () {
     console.log ("Enter Manager information")
@@ -76,24 +45,23 @@ function start () {
 
             moreQuestions ()
 
-            // console.log("team member added");
-            // console.log(team[0]);
         })
       
         .catch(err => { console.log(err)});
-
 }
+
+
 
 function createCard (member) {
 
     console.log("inside function")
 
-switch (role) {
+switch (member.getRole()) {
     case 'Manager':
       return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: steelblue; border-style: solid;">
           <h2>${member.name}</h2>
-          <h3>${role}</h3>
+          <h3>${member.getRole()}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -106,7 +74,7 @@ switch (role) {
       return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: lightgreen; border-style: solid;">
           <h2>${member.name}</h2>
-          <h3>${role}</h3>
+          <h3>${member.getRole()}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -119,7 +87,7 @@ switch (role) {
       return `<div class = "col-3 text-center" style="height: 200px; border-style: double; margin-left: 20px; margin-bottom: 20px;">
       <div style="background-color: yellow; border-style: solid;">
           <h2>${member.name}</h2>
-          <h3>${role}</h3>
+          <h3>${member.getRole()}</h3>
       </div>
       <div>
           <div>ID: ${member.id}</div>
@@ -129,10 +97,9 @@ switch (role) {
   </div>`
       break;
   }
-
 }
 
-start ()
+
 
 function moreQuestions () {
 
@@ -167,9 +134,7 @@ function moreQuestions () {
     })
   
     .catch(err => { console.log(err)});
-
 }
-
 
 
 
@@ -201,8 +166,6 @@ function engineerQuestions () {
     .then (answer => {
       
         const engineer = new Engineer (answer.name, answer.id, answer.email, answer.github);
-
-        role = "Engineer"
 
         team.push (createCard(engineer));
 
@@ -242,8 +205,6 @@ function internQuestions () {
       
         const intern = new Intern (answer.name, answer.id, answer.email, answer.school);
 
-        role = "Intern"
-
         team.push (createCard(intern));
 
         moreQuestions ()
@@ -251,3 +212,13 @@ function internQuestions () {
         .catch(err => { console.log(err)});
         
 }
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, function (err) {
+        if (err) {
+            return console.log(err);
+        } else
+            console.log("Generating HTML...");
+    });
+};
+
