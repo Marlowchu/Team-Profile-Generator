@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHtml = require('./generateHtml');
+const generateHtml = require('./src/generateHtml');
 
 
 
@@ -33,10 +33,10 @@ function writeToFile(fileName, data) {
 // init ();
 
 
-const Employee = require('./employee');
-const Manager = require('./manager');
-const Engineer = require('./engineer');
-const Intern = require('./intern');
+// const Employee = require('./lib/employee');
+const Manager = require('./lib/manager');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
 
 
 let team = []
@@ -110,7 +110,7 @@ switch (role) {
       </div>
       <div>
           <div>ID: ${member.id}</div>
-          <a href="mailto:${member.email}">Email: ${member.email}</a>
+          <a href="mailto:${member.email}">Email: ${member.email}</a> <br>
           <a href="https://github.com/${member.github}" target="_blank">Github: ${member.github}</a>
       </div>
   </div>`      
@@ -124,7 +124,7 @@ switch (role) {
       <div>
           <div>ID: ${member.id}</div>
           <a href="mailto:${member.email}">Email: ${member.email}</a>
-          <div>School #: ${member.school}</div>
+          <div>School: ${member.school}</div>
       </div>
   </div>`
       break;
@@ -159,7 +159,7 @@ function moreQuestions () {
               break;
             case "All done":
                 const htmlInfo = generateHtml(team);
-                writeToFile('./utils/Team.html', htmlInfo);
+                writeToFile('./dist/Team.html', htmlInfo);
               break;
            
           }
