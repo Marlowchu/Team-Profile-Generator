@@ -1,3 +1,4 @@
+// imports
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHtml = require('./src/generateHtml');
@@ -6,12 +7,13 @@ const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
 
+// array to hold team members
 let team = []
+
 
 start ()
 
-
-
+// start of program, Manager prompt 
 function start () {
     console.log ("Enter Manager information")
 
@@ -38,11 +40,13 @@ function start () {
         }
     ])
         .then (answer => {
+            // create new manager opject with answers from user
             const manager = new Manager (answer.name, answer.id, answer.email, answer.officeNumber)
 
-            // createCard(manager)
+            // Push manger infor to function that creates html to make card
             team.push (createCard(manager));
 
+            // ask user if they have more team members or are they done
             moreQuestions ()
 
         })
@@ -51,10 +55,8 @@ function start () {
 }
 
 
-
+// Functions to create Html container with the user info.
 function createCard (member) {
-
-    console.log("inside function")
 
 switch (member.getRole()) {
     case 'Manager':
@@ -100,7 +102,7 @@ switch (member.getRole()) {
 }
 
 
-
+// Funtion to ask user if they have more team members or are they done
 function moreQuestions () {
 
    inquirer
@@ -114,7 +116,7 @@ function moreQuestions () {
     ])
     .then (answer => {
       
-      
+    //   switch statement to handle user choice
         switch (answer.member) {
             case "Engineer":
                return engineerQuestions ()
@@ -137,7 +139,7 @@ function moreQuestions () {
 }
 
 
-
+// function for specific questons for specific team member
 function engineerQuestions () {
 
     inquirer.prompt([
@@ -175,7 +177,7 @@ function engineerQuestions () {
 
 }
 
-
+// function for specific questons for specific team member
 function internQuestions () {
 
     inquirer.prompt([
@@ -213,6 +215,7 @@ function internQuestions () {
         
 }
 
+// funtion to generate Html page
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, function (err) {
         if (err) {

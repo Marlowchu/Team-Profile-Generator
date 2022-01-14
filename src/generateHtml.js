@@ -1,11 +1,7 @@
 
-let team1 = []
 
+// function that takes the array of containers and adds it to pre-made html
 function generateHtml (data) {
-
-team1 = data
-
-console.log("generateHtml")
 
 return `<!DOCTYPE html>
 <html lang="en">
@@ -24,7 +20,7 @@ return `<!DOCTYPE html>
 
 <div class= "container">
 
-  <div class= "row justify-content-center" id= "print">${team1.join(' ')}</div>
+  <div class= "row justify-content-center" id= "print">${data.join(' ')}</div>
   
 </div>   
 </body>
